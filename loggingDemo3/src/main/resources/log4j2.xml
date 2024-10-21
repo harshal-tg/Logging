@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+    <Appenders>
+        <!-- Rolling File Appender for User Type 1 -->
+        <Routing name="RoutingAppender">
+            <Routes pattern="${ctx:userType}">
+                <Route key="faculty">
+                    <RollingFile name="Type1File" fileName="f:/logs/faculty_logs/faculty.log"
+                                 filePattern="f:/logs/faculty_older/faculty-%d{yyyy-MM-dd}-%i.log">
+                        <PatternLayout>
+                            <Pattern>%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n</Pattern>
+                        </PatternLayout>
+                        <Policies>
+                            <!-- Rotate based on size (10 MB) -->
+                            <SizeBasedTriggeringPolicy size="4KB"/>
+                            <!-- Rotate daily -->
+                            <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                        </Policies>
+                        <DefaultRolloverStrategy max="10"/>
+                    </RollingFile>
+                </Route>
+
+                <!-- Similar rolling file appenders for other user types -->
+                <Route key="cv">
+                    <RollingFile name="Type2File" fileName="f:/logs/cv_logs/cv.log"
+                                 filePattern="f:/logs/cv_older/cv-%d{yyyy-MM-dd}-%i.log">
+                        <PatternLayout>
+                            <Pattern>%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n</Pattern>
+                        </PatternLayout>
+                        <Policies>
+                            <SizeBasedTriggeringPolicy size="4KB"/>
+                            <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                        </Policies>
+                        <DefaultRolloverStrategy max="10"/>
+                    </RollingFile>
+                </Route>
+
+                <Route key="edp">
+                    <RollingFile name="Type3File" fileName="f:/logs/edp_logs/edp.log"
+                                 filePattern="f:/logs/edp_older/edp-%d{yyyy-MM-dd}-%i.log">
+                        <PatternLayout>
+                            <Pattern>%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n</Pattern>
+                        </PatternLayout>
+                        <Policies>
+                            <SizeBasedTriggeringPolicy size="4KB"/>
+                            <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                        </Policies>
+                        <DefaultRolloverStrategy max="10"/>
+                    </RollingFile>
+                </Route>
+
+                <Route key="panel">
+                    <RollingFile name="Type4File" fileName="f:/logs/panel_logs/panel.log"
+                                 filePattern="f:/logs/panel_older/panel-%d{yyyy-MM-dd}-%i.log">
+                        <PatternLayout>
+                            <Pattern>%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n</Pattern>
+                        </PatternLayout>
+                        <Policies>
+                            <SizeBasedTriggeringPolicy size="4KB"/>
+                            <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                        </Policies>
+                        <DefaultRolloverStrategy max="10"/>
+                    </RollingFile>
+                </Route>
+
+                <Route key="exam">
+                    <RollingFile name="Type5File" fileName="f:/logs/exam_logs/exam.log"
+                                 filePattern="f:/logs/exam_older/exam-%d{yyyy-MM-dd}-%i.log">
+                        <PatternLayout>
+                            <Pattern>%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n</Pattern>
+                        </PatternLayout>
+                        <Policies>
+                            <SizeBasedTriggeringPolicy size="4KB"/>
+                            <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                        </Policies>
+                        <DefaultRolloverStrategy max="10"/>
+                    </RollingFile>
+                </Route>
+            </Routes>
+        </Routing>
+
+        <!-- Console appender for general logs -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{dd-MM-yyyy HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <!-- Root logger -->
+        <Root level="info">
+            <AppenderRef ref="RoutingAppender"/>
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>
